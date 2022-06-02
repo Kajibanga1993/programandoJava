@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+
+        <!-- Here a loader is created which 
+             loads till response comes -->
+             <div class="d-flex justify-content-center">
+                <div class="spinner-border" 
+                     role="status" id="loading">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <h1>Registered Employees</h1>
+            <!-- table for showing data -->
+            <table id="employees"></table>
+
+
+    
+
+
+<script>
+
+const api_url = "http://localhost:8080/cargo";
+
+a// Defining async function
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    console.log(data);
+    if (response) {
+        hideloader();
+    }
+    show(data);
+}
+// Calling that async function
+getapi(api_url);
+
+
+
+// Function to hide the loader
+function hideloader() {
+    document.getElementById('loading').style.display = 'none';
+}
+// chamando a funcao de forma asyncrona
+
+function show(data){
+    let tab = 
+        `<tr>
+          <th>id</th>
+          <th>nome</th>
+          <th>salario</th>
+          <th>funcionario</th>
+         </tr>`;
+    
+
+}
+
+
+
+for (let r of data.list) {
+        tab += `<tr> 
+    
+    <td>${r.name}</td>
+  
+             
+</tr>`;
+    }
+
+
+    document.getElementById("employees").innerHTML = tab;
+    </script>
+
+
+
+</body>
+</html>
